@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The River Ledger — Mississippi Floods "Upwards"</title>
+  <style>
+    :root{
+      --brand:#0b3d91;
+      --accent:#00b4d8;
+      --muted:#6b7280;
+      --bg:#f7fbff;
+      --paper:#ffffff;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#eaf6ff 0%,var(--bg) 60%);
+      color:#0b1220;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Top bar */
+    .topbar{
+      background:linear-gradient(90deg,var(--brand),#0f62c9);
+      color:white;
+      padding:10px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      font-weight:700;
+      letter-spacing:0.4px;
+    }
+    .brand .logo{
+      width:42px;height:42px;border-radius:6px;
+      background:linear-gradient(135deg,#00d4ff,#0066ff);
+      box-shadow:0 2px 8px rgba(3,6,20,.18);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:800;
+    }
+    .disclaimer-pill{
+      background:rgba(255,255,255,0.12);
+      padding:6px 10px;border-radius:999px;
+      font-size:13px;
+      display:inline-block;
+    }
+
+    /* Layout */
+    .container{
+      max-width:1100px;
+      margin:22px auto;
+      padding:20px;
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:24px;
+    }
+
+    /* Main card */
+    .main-article{
+      background:var(--paper);
+      border-radius:12px;
+      box-shadow:0 6px 30px rgba(9,30,66,0.08);
+      overflow:hidden;
+    }
+    .hero{
+      position:relative;
+      padding:28px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+    }
+    .hero .headline{
+      flex:1;
+    }
+    .headline h1{
+      margin:0 0 10px 0;
+      font-size:30px;
+      color:var(--brand);
+      line-height:1.05;
+    }
+    .byline{
+      font-size:14px;color:var(--muted);
+    }
+
+    /* Water-wall visual */
+    .water-wall{
+      width:220px;
+      height:180px;
+      border-radius:10px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#0099ff 0%, #00d4ff 40%, #8fe9ff 70%);
+      box-shadow: inset 0 -40px 80px rgba(0,0,0,0.08);
+      position:relative;
+      border:3px solid rgba(255,255,255,0.15);
+    }
+    /* stylized vertical "wall" with animated waves */
+    .waves{
+      position:absolute;
+      inset:0;
+      display:block;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.14) 2%, transparent 6%),
+        radial-gradient(circle at 80% 60%, rgba(255,255,255,0.08) 2%, transparent 5%);
+      mix-blend-mode:overlay;
+      opacity:0.95;
+      transform-origin:center;
+      animation: slowWave 6s linear infinite;
+    }
+    @keyframes slowWave{
+      0%{transform:translateY(0) skewX(0);}
+      50%{transform:translateY(-10px) skewX(-2deg);}
+      100%{transform:translateY(0) skewX(0);}
+    }
+    .water-label{
+      position:absolute;
+      left:8px;bottom:8px;
+      background:rgba(0,0,0,0.25);
+      color:white;padding:6px 8px;border-radius:6px;
+      font-size:12px;font-weight:600;
+      backdrop-filter: blur(6px);
+    }
+
+    .content{
+      padding:0 28px 26px 28px;
+      color:#0b1220;
+      font-size:16px;
+    }
+    .lead{
+      font-size:18px;
+      color:#07204a;
+    }
+    .notice{
+      margin-top:12px;
+      padding:12px 14px;
+      background:#fff3cd;
+      border-left:4px solid #ffecb5;
+      border-radius:8px;
+      color:#6a4f00;
+      font-weight:600;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position:relative;
+      top:0;
+    }
+    .card{
+      background:var(--paper);
+      padding:16px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(9,30,66,0.06);
+      margin-bottom:18px;
+    }
+    .other-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+    .other-list li{display:flex;gap:12px;align-items:center;}
+    .thumb{
+      width:64px;height:48px;border-radius:8px;background:linear-gradient(90deg,#bde0fe,#8ec5ff);
+      flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;color:#013a7a;font-weight:700;
+    }
+
+    footer{
+      max-width:1100px;margin:20px auto 60px;padding:18px;color:var(--muted);text-align:center;font-size:14px;
+    }
+
+    /* Prominent satire ribbon */
+    .satire-ribbon{
+      position:fixed;
+      right:18px;bottom:18px;
+      background:linear-gradient(90deg,#ff4154,#ff7649);
+      color:white;padding:10px 14px;border-radius:999px;box-shadow:0 8px 30px rgba(255,65,84,0.18);
+      font-weight:700;font-size:13px;
+    }
+
+    @media (max-width:980px){
+      .container{grid-template-columns:1fr; padding:16px;}
+      .water-wall{width:160px;height:130px;}
+      .satire-ribbon{right:12px;bottom:12px;padding:8px 10px;font-size:12px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar" role="banner" aria-label="The River Ledger top bar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">RL</div>
+      <div>
+        <div style="font-size:14px;opacity:0.95">The River Ledger</div>
+        <div style="font-size:12px;opacity:0.85">Local &amp; Imagined — News & Satire</div>
+      </div>
+    </div>
+    <div class="disclaimer" aria-hidden="false">SATIRE • THIS SITE IS FICTIONAL</div>
+  </div>
+
+  <main class="container" role="main">
+    <article class="main-article" aria-labelledby="main-headline">
+      <div class="hero">
+        <div class="headline">
+          <h1 id="main-headline">Mississippi River Floods "Upwards" — A Vertical Wall of Water Blocks All Crossings</h1>
+          <div class="byline">By: Avery Quill • January 5, 2026 • Illustrated report</div>
+        </div>
+
+        <div class="water-wall" aria-hidden="true" title="Illustration: wall of water">
+          <div class="waves" role="img" aria-label="Animated stylized waves"></div>
+          <div class="water-label">Illustration</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p class="lead">In an impossible and entirely fictional occurrence, the Mississippi River reportedly "flooded upwards" overnight, forming a continuous vertical wall of water that—according to purely satirical eyewitnesses—made boats, bridges, and even thoughts of crossing completely nonviable.</p>
+
+        <div class="notice" role="note">
+          NOTE: This article is satirical and fictional. The event described did not happen. This site publishes imagined scenarios for entertainment only.
+        </div>
+
+        <h3>How the "upward flood" was described (satire)</h3>
+        <p>Local raconteurs described a surreal blue curtain rising along the river's banks, with water seemingly defying gravity to create a sheer vertical face. Commuters joked that GPS navigation now shows "Wall of Water — detour not available." Residents reportedly considered bringing ladders and rock-climbing gear before remembering that this is a work of fiction.</p>
+
+        <h3>Official statements (made-up)</h3>
+        <p>"We've never seen anything like it in the manuals," said a fictional spokesperson. "Our hydrologists are scratching their heads, then laughing, then reminding us to always label satire very clearly."</p>
+
+        <h3>Local reaction</h3>
+        <p>Social media feeds filled with mock tutorials on how to "surf" the wall, when in fact public safety officials (in this imaginary universe) reminded everyone that you cannot surf vertical floodwalls and you should check real local emergency channels for genuine alerts.</p>
+
+        <h3>Why we wrote this</h3>
+        <p>This piece is an exercise in creative satire — an absurd image (a river choosing to rise straight up) spun into a mock breaking-news report. If you'd like this page adapted into a printable poster, a multi-page fake-news magazine, or converted into a simple blog template, tell me which option you want and I will generate it.</p>
+      </div>
+    </article>
+
+    <aside class="sidebar" aria-label="Related content">
+      <div class="card">
+        <strong>Other imagined headlines</strong>
+        <ul class="other-list" aria-hidden="false">
+          <li><div class="thumb">1</div><div><strong>Local fisherman invents waterproof umbrella boat</strong><div style="color:var(--muted);font-size:13px">Satire • 2 hours ago</div></div></li>
+          <li><div class="thumb">2</div><div><strong>Bridge to nowhere becomes literal—construction paused</strong><div style="color:var(--muted);font-size:13px">Satire • 1 day ago</div></div></li>
+          <li><div class="thumb">3</div><div><strong>How to climb a cliff of water: a totally useless how-to</strong><div style="color:var(--muted);font-size:13px">Satire • 3 days ago</div></div></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <strong>From the newsroom</strong>
+        <p style="color:var(--muted);font-size:14px;margin-top:8px;">
+          The River Ledger publishes imaginative pieces and parody. We aim to be clear and not mislead: treat all front-page scenarios as fictional unless otherwise marked.
+        </p>
+      </div>
+
+    </aside>
+  </main>
+
+  <div class="satire-ribbon" role="status" aria-live="polite">SATIRE — NOT REAL NEWS</div>
+
+  <footer>
+    <div><strong>The River Ledger</strong> — Fiction &amp; Satire. For real-world emergencies, consult official government sources and verified local news outlets.</div>
+    <div style="margin-top:8px;color:var(--muted);font-size:13px">If you'd like this exported as a zip or expanded into a multi-page site, say which assets you want (logo, images, mobile layout).</div>
+  </footer>
+</body>
+</html>
